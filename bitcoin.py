@@ -8,3 +8,13 @@ def get_bitcoin_price():
     data = response.json()
 
     return data["bitcoin"]["usd"]
+
+
+def check_price(price, lower_limit, upper_limit):
+    if price < lower_limit:
+        return "below"
+
+    if price > upper_limit:
+        return "above"
+
+    return "normal"
