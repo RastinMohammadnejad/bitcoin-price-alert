@@ -17,15 +17,29 @@ def main():
 
         if status != previous_status:
             if status == "below":
-                message = f"Bitcoin price is below ${lower_limit}.\nCurrent price: ${price}"
+                message = (
+                    "Bitcoin Price Alert!!!\n\n"
+                    f"Current price: ${price}\n"
+                    f"Lower limit: ${lower_limit}\n\n"
+                    "Bitcoin price is below your limit."
+                )
                 send_message(message)
 
             elif status == "above":
-                message = f"Bitcoin price is above ${upper_limit}.\nCurrent price: ${price}"
+                message = (
+                    "Bitcoin Price Alert!!!\n\n"
+                    f"Current price: ${price}\n"
+                    f"Upper limit: ${upper_limit}\n\n"
+                    "Bitcoin price is above your limit."
+                )
                 send_message(message)
 
             else:
-                message = f"Bitcoin price is back within the limits.\nCurrent price: ${price}"
+                message = (
+                    "Bitcoin Price Alert!!!\n\n"
+                    f"Current price: ${price}\n\n"
+                    "Bitcoin price is back within the limits."
+                )
                 send_message(message)
 
             previous_status = status
