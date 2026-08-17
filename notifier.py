@@ -1,4 +1,5 @@
 import os
+
 import requests
 from dotenv import load_dotenv
 
@@ -23,6 +24,6 @@ def send_message(message):
 
         return response.json()
 
-    except requests.RequestException:
-        print("Failed to send Telegram message.")
+    except requests.RequestException as error:
+        print(f"Failed to send Telegram message: {error}")
         return None
