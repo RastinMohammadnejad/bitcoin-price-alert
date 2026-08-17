@@ -1,4 +1,5 @@
 import time
+
 from bitcoin import get_bitcoin_price, check_price
 from notifier import send_message
 
@@ -6,6 +7,7 @@ from notifier import send_message
 def main():
     lower_limit = float(input("Enter lower limit: "))
     upper_limit = float(input("Enter upper limit: "))
+    check_interval = int(input("Check interval (seconds): "))
 
     previous_status = "normal"
 
@@ -44,7 +46,7 @@ def main():
 
             previous_status = status
 
-        time.sleep(10)
+        time.sleep(check_interval)
 
 
 if __name__ == "__main__":
