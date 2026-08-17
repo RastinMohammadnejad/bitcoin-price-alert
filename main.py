@@ -1,5 +1,4 @@
 import time
-
 from bitcoin import get_bitcoin_price, check_price
 from notifier import send_message
 
@@ -13,6 +12,12 @@ def main():
 
     while True:
         price = get_bitcoin_price()
+
+        if price is None:
+            print("Failed to fetch Bitcoin price. Retrying...")
+            time.sleep(check_interval)
+            continue
+
         status = check_price(price, lower_limit, upper_limit)
 
         print(f"\nBitcoin price: ${price}")
