@@ -1,5 +1,4 @@
 import os
-
 import requests
 from dotenv import load_dotenv
 
@@ -18,6 +17,12 @@ def send_message(message):
         "text": message
     }
 
-    response = requests.post(url, data=data)
+    try:
+        response = requests.post(url, data=data, timeout=10)
+        response.raise_for_status()
 
-    return response.json()
+        return response.json()
+
+    except requests.RequestException:
+        print("Failed to send Telegram message.")
+        return None
