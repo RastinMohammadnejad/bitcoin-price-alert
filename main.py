@@ -1,7 +1,7 @@
 import time
 
 from bitcoin import get_bitcoin_price, check_price
-from notifier import send_message
+from notifier import send_message, create_alert_message
 
 
 def get_number(message):
@@ -40,31 +40,14 @@ def main():
         print(f"\nBitcoin price: ${price}")
 
         if status != previous_status:
-            if status == "below":
-                message = (
-                    "Bitcoin Price Alert!!!\n\n"
-                    f"Current price: ${price}\n"
-                    f"Lower limit: ${lower_limit}\n\n"
-                    "Bitcoin price is below your limit."
-                )
-                send_message(message)
+            message = create_alert_message(
+                status,
+                price,
+                lower_limit,
+                upper_limit
+            )
 
-            elif status == "above":
-                message = (
-                    "Bitcoin Price Alert!!!\n\n"
-                    f"Current price: ${price}\n"
-                    f"Upper limit: ${upper_limit}\n\n"
-                    "Bitcoin price is above your limit."
-                )
-                send_message(message)
-
-            else:
-                message = (
-                    "Bitcoin Price Alert!!!\n\n"
-                    f"Current price: ${price}\n\n"
-                    "Bitcoin price is back within the limits."
-                )
-                send_message(message)
+            send_message(message)
 
             previous_status = status
 

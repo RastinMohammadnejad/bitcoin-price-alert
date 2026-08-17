@@ -24,3 +24,27 @@ def send_message(message):
     except requests.RequestException as error:
         print(f"Failed to send Telegram message: {error}")
         return None
+
+
+def create_alert_message(status, price, lower_limit, upper_limit):
+    if status == "below":
+        return (
+            "Bitcoin Price Alert!!!\n\n"
+            f"Current price: ${price}\n"
+            f"Lower limit: ${lower_limit}\n\n"
+            "Bitcoin price is below your limit."
+        )
+
+    if status == "above":
+        return (
+            "Bitcoin Price Alert!!!\n\n"
+            f"Current price: ${price}\n"
+            f"Upper limit: ${upper_limit}\n\n"
+            "Bitcoin price is above your limit."
+        )
+
+    return (
+        "Bitcoin Price Alert!!!\n\n"
+        f"Current price: ${price}\n\n"
+        "Bitcoin price is back within the limits."
+    )
