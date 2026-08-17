@@ -1,5 +1,4 @@
 import os
-
 import requests
 from dotenv import load_dotenv
 
@@ -11,6 +10,10 @@ chat_id = os.getenv("TELEGRAM_CHAT_ID")
 
 
 def send_message(message):
+    if not bot_token or not chat_id:
+        print("Telegram settings are missing.")
+        return None
+
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
 
     data = {
