@@ -1,4 +1,5 @@
 import time
+
 from bitcoin import get_bitcoin_price, check_price
 from notifier import send_message
 
@@ -7,6 +8,14 @@ def main():
     lower_limit = float(input("Enter lower limit: "))
     upper_limit = float(input("Enter upper limit: "))
     check_interval = int(input("Check interval (seconds): "))
+
+    if lower_limit >= upper_limit:
+        print("Lower limit must be less than upper limit.")
+        return
+
+    if check_interval <= 0:
+        print("Check interval must be greater than zero.")
+        return
 
     previous_status = "normal"
 
